@@ -3,7 +3,7 @@ module.exports = {
     name: 'help',
     aliases: [],
     inVoiceChannel: false,
-    run: async (distube, message) => {
+    run: async (client, message) => {
         message.channel.send('Test')
         const exampleEmbed = {
             color: 0x0099ff,
