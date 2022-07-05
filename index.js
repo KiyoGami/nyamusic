@@ -20,7 +20,7 @@ client.distube = new DisTube(client, {
     leaveOnStop: true,
     emitNewSongOnly: true,
     emitAddSongWhenCreatingQueue: false,
-    emitAddListWhenCreatingQueue: true,
+    emitAddListWhenCreatingQueue: false,
     youtubeDL: false
 })
 
