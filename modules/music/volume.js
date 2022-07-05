@@ -6,7 +6,7 @@ module.exports = {
         const queue = client.distube.getQueue(message)
         if(!queue) return message.channel.send('Không có hàng chờ để set âm lượng')
         let percent = new Number()
-        if(!args.length) percent = 100
+        if(!args.length) percent = 70
         else percent = Number(args[0])
         if (isNaN(percent)) return message.channel.send(`Âm lượng không hợp lệ`)
         client.distube.setVolume(message, percent)
