@@ -1,6 +1,7 @@
 const Discord = require(`discord.js`)
 const { DisTube, default: dist } = require('distube')
-const fs = require('fs')
+const fs = require('fs');
+const { clearLine } = require('readline');
 const config = require(`./config.json`)
 
 const prefix = config.prefix;
@@ -16,10 +17,10 @@ const client = new Discord.Client({
 client.commands = new Map()
 
 client.distube = new DisTube(client, {
-    leaveOnStop: false,
+    leaveOnStop: true,
     emitNewSongOnly: true,
     emitAddSongWhenCreatingQueue: false,
-    emitAddListWhenCreatingQueue: false,
+    emitAddListWhenCreatingQueue: true,
     youtubeDL: false
 })
 
@@ -48,9 +49,21 @@ client.on('messageCreate', async message => {
     const command = args.shift().toLowerCase()
     const cmd = client.commands.get(command)
     if(!cmd) return 
-    if(message.author.id != config.owner) return message.channel.send('Bạn không phải chủ nhân của tôi :Teehee:')
     if (cmd.inVoiceChannel && !message.member.voice.channel) return message.channel.send('Bạn cần vào phòng voice trước')
     cmd.run(client, message, args)
 })
 
+client.distube
+    .on('addList', (queue, playlist) =>
+        queue.textChannel.send(`Đã thêm playlist \`${playlist.name}\` (${playlist.songs.length} bài hát) vào hàng chờ`)
+    )
+    .on('addSong', (queue, song) =>
+        queue.textChannel.send(`Đã thêm ${song.name} - \`${song.formattedDuration}\` vào hàng chờ bởi ${song.user.username}`)
+    )
+    .on('playSong', (queue, song) =>
+        queue.textChannel.send(`Đang phát \`${song.name}\` - \`${song.formattedDuration}\`\nyêu cầu: ${song.user.username}`)
+    )
+    // .on('empty', channel => channel.send('Không còn ai nghe nhạc nữa, mị đi đây :< ...'))
+    .on('searchNoResult', (message, query) => message.channel.send(`không có kết quả tìm kiếm cho \`${query}\`!`))
+    .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
 client.login(process.env.token);
