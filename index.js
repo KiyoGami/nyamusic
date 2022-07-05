@@ -53,4 +53,4 @@ client.on('messageCreate', async message => {
     cmd.run(client, message, args)
 })
 
-client.login(config.token);
+client.login(process.env.token);
