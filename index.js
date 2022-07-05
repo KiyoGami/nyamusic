@@ -1,7 +1,6 @@
 const Discord = require(`discord.js`)
 const { DisTube, default: dist } = require('distube')
 const fs = require('fs');
-const { clearLine } = require('readline');
 const config = require(`./config.json`)
 
 const prefix = config.prefix;
