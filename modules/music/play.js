@@ -11,7 +11,7 @@ module.exports = {
         }).then(() => {
             const queue = client.distube.getQueue(message)
             const song = queue.songs[queue.songs.length - 1]
-            message.channel.send(`Đã thêm vào hàng chờ: ${song.name} - ${song.formattedDuration}`)
+            message.channel.send(`Đã thêm vào hàng chờ: ${song.name} - \`${song.formattedDuration}\``)
         })
     }
 }
