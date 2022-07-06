@@ -1,6 +1,4 @@
-const { MessageActionRow, MessageSelectMenu, Interaction } = require('discord.js');
-const { MessageEmbed} = require('discord.js')
-
+const { MessageActionRow, MessageSelectMenu} = require('discord.js');
 
 const music = {
     color: [255, 169, 71],

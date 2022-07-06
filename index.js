@@ -11,6 +11,7 @@ const client = new Discord.Client({
       Discord.Intents.FLAGS.GUILDS,
       Discord.Intents.FLAGS.GUILD_MESSAGES,
       Discord.Intents.FLAGS.GUILD_VOICE_STATES,
+      Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS
     ]
 })
 
@@ -38,10 +39,8 @@ fs.readdir('./modules/', (err, folders) => {
 })
 
 client.on('ready', () => {
-    console.log(`${client.user.username} is ready to play music.`)
+    console.log('ready')
 })  
-
-const owner = 
 
 client.on('messageCreate', async message => {
     if (message.author.bot || !message.guild) return
