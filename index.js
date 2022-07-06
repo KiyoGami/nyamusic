@@ -67,7 +67,7 @@ client.distube
     .on('searchNoResult', (message, query) => message.channel.send(`không có kết quả tìm kiếm cho \`${query}\`!`))
     .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
 
-client.login(process.config.token)
+client.login(process.env.token)
 
 let embedPlay = (song) => embed = {
     color: [255, 169, 71],
