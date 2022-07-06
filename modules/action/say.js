@@ -5,6 +5,6 @@ module.exports = {
     run:async (client, message, args) => {
         string = args.join(' ')
         message.delete()
-        message.channel.send(string)
+        if(string.length) message.channel.send(string)
     }
 }   
