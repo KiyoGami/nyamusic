@@ -193,7 +193,7 @@ module.exports = {
 
         const collector = msg.createMessageComponentCollector({
             componentType: 'SELECT_MENU',
-            time: 15000,
+            time: 20000,
         })
         
         collector.on('collect', async interaction => {
