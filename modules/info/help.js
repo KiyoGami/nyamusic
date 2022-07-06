@@ -93,7 +93,7 @@ const info = {
         },
         {
             name: 'Dánh sách guilds',
-            value: 'server/guilds/g',
+            value: 'servers/guilds/g',
             inline: true,
         },
         {
