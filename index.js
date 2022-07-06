@@ -79,7 +79,7 @@ let embedPlay = (song) => embed = {
 
 let embedAdd = (song, type) => embed = {
     color: [255, 169, 71],
-    author: {name: 'Thêm danh sách'},
+    author: {name: `Thêm ${type}`},
     title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),
     url: song.url,   
     description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**`,
