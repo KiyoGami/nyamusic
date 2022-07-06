@@ -57,12 +57,12 @@ function embedsQueue(songs){
             color: [255, 169, 71],
             title: 'Hàng chờ',
             thumbnail: {
-                url: 'https://cdn.discordapp.com/attachments/993937119355609139/994314384459448400/music-album.png'
+                url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
             },
             description: `${listSong}`,
             footer:{
                 text: `Trang ${i/10 + 1}/${songs.length % 10 == 0 ? songs.length/10 : (songs.length - songs.length % 10)/10 + 1}`,
-                icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994075767581454366/command.png'
+                icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994314384459448400/music-album.png'
             }
         }
         queue.push(embed)
