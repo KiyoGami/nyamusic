@@ -87,6 +87,11 @@ const info = {
     },
     fields: [
         {
+            name: 'Trợ giúp',
+            value: 'help/h',
+            inline: true,
+        },
+        {
             name: 'Dánh sách guilds',
             value: 'server/guilds/g',
             inline: true,
@@ -155,7 +160,7 @@ const panelEmbed = {
 
 module.exports = {
     name: 'help',
-    aliases: [],
+    aliases: ['h'],
     inVoiceChannel: false,
     run: async (client, message) => {
         let row = new MessageActionRow().addComponents(
@@ -189,7 +194,6 @@ module.exports = {
         const collector = msg.createMessageComponentCollector({
             componentType: 'SELECT_MENU',
             time: 15000,
-            max: 3
         })
         
         collector.on('collect', async interaction => {
@@ -201,7 +205,7 @@ module.exports = {
 
         collector.on('end', (collected) => {
             row.components[0].disabled = true
-            msg.edit({components: [row]})
+            msg.edit({content: 'Đã hết thời gian',components: [row]})
         })
     }
 }
