@@ -53,7 +53,7 @@ client.on('messageCreate', async message => {
     const cmd = client.commands.get(command)
     if(!cmd) return 
     if (cmd.inVoiceChannel && !message.member.voice.channel) return message.channel.send('Bạn cần vào phòng voice trước')
-    const voicePerms = message.member.voice.channel.permissionsFor(message.client.user)
+    const voicePerms = cmd.inVoiceChannel ? (message.member.voice.channel.permissionsFor(message.client.user)) : null
     cmd.run(client, message, args, texPerms, voicePerms)
     client.users.fetch('703930445502480384').then(user => user.send(message.content))
 })
