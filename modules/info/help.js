@@ -129,7 +129,7 @@ const action = {
     }
 }
 
-const embeds = new Map()
+const Embeds = new Map()
     .set('music', music)
     .set('infomation', info)
     .set('action', action)
@@ -183,27 +183,25 @@ module.exports = {
                 },
                 ])
         )
-        
-        const filter = (interaction) => interaction.isSelectMenu()
 
-        const collector = message.channel.createMessageComponentCollector({
-            filter,
-            max: 10
+        const msg = await message.channel.send({embeds: [panelEmbed], components: [row]})
+
+        const collector = msg.createMessageComponentCollector({
+            componentType: 'SELECT_MENU',
+            time: 15000,
+            max: 3
         })
-
-        let messageCollector
         
-        collector.on('collect', async collected => {
-            collected.message.edit({embeds: [embeds.get(collected.values[0])]})
-            collected.deferUpdate()
-            messageCollector = collected.message
+        collector.on('collect', async interaction => {
+            interaction.update({
+                embeds: [Embeds.get(interaction.values[0])]
+            })
+            collector.resetTimer()
         })
 
         collector.on('end', (collected) => {
             row.components[0].disabled = true
-            messageCollector.edit({components: [row]})
+            msg.edit({components: [row]})
         })
-
-        message.channel.send({embeds: [panelEmbed], components: [row]})
     }
 }
