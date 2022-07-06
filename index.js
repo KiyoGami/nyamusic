@@ -82,7 +82,8 @@ let embedAdd = (song, type) => embed = {
     author: {name: `Thêm ${type}`},
     title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),
     url: song.url,   
-    description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**`,
+    description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**\n
+                  Số lượng: \`${type == 'bài hát' ? 1 : song.songs.length}\``,
     thumbnail: {
         url: song.thumbnail,
     },
