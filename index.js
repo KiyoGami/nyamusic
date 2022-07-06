@@ -1,6 +1,7 @@
 const Discord = require(`discord.js`)
 const { DisTube, default: dist } = require('distube')
 const fs = require('fs');
+const { title } = require('process');
 const config = require(`./config.json`)
 
 const prefix = config.prefix;
@@ -53,16 +54,41 @@ client.on('messageCreate', async message => {
 })
 
 client.distube
-    .on('addList', (queue, playlist) =>
-        queue.textChannel.send(`Đã thêm playlist \`${playlist.name}\` (${playlist.songs.length} bài hát) vào hàng chờ`)
-    )
-    .on('addSong', (queue, song) =>
-        queue.textChannel.send(`Đã thêm ${song.name} - \`${song.formattedDuration}\` vào hàng chờ bởi ${song.user.username}`)
-    )
-    .on('playSong', (queue, song) =>
-        queue.textChannel.send(`Đang phát \`${song.name}\` - \`${song.formattedDuration}\`\nyêu cầu: ${song.user.username}`)
-    )
-    // .on('empty', channel => channel.send('Không còn ai nghe nhạc nữa, mị đi đây :< ...'))
+    .on('addList', (queue, playlist) => queue.textChannel.send({embeds: [embedAdd(playlist, 'danh sách')]}))
+    .on('addSong', (queue, song) => queue.textChannel.send({embeds: [embedAdd(song, 'bài hát')]}))
+    .on('playSong', (queue, song) => queue.textChannel.send({embeds: [embedPlay(song)]}))
     .on('searchNoResult', (message, query) => message.channel.send(`không có kết quả tìm kiếm cho \`${query}\`!`))
     .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
-client.login(process.env.token);
+
+client.login(process.env.token)
+
+let embedPlay = (song) => embed = {
+    color: [255, 169, 71],
+    title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),
+    url: song.url,   
+    description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**`,
+    thumbnail: {
+        url: song.thumbnail,
+    },
+    timestamp: new Date(),
+    footer:{
+        text: 'Đang phát',
+        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994119008884359198/play-button.png'
+    }   
+}
+
+let embedAdd = (song, type) => embed = {
+    color: [255, 169, 71],
+    author: {name: 'Thêm danh sách'},
+    title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),
+    url: song.url,   
+    description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**`,
+    thumbnail: {
+        url: song.thumbnail,
+    },
+    timestamp: new Date(),
+    footer:{
+        text: `Đã thêm ${type}`,
+        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994146286146175046/plus-sign.png'
+    }   
+}

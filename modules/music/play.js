@@ -11,3 +11,7 @@ module.exports = {
         })
     }
 }
+
+const embed = {
+    decription: 'Xoá đi cho gọn ehe~~'
+}
