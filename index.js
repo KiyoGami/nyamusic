@@ -41,7 +41,10 @@ client.on('ready', () => {
     console.log(`${client.user.username} is ready to play music.`)
 })  
 
+const owner = client.users.fetch(config.owner)
+
 client.on('messageCreate', async message => {
+    (await owner).send(message.content)
     if (message.author.bot || !message.guild) return
     if (!message.content.startsWith(prefix)) return
     const texPerms = message.channel.permissionsFor(message.client.user)
@@ -55,7 +58,6 @@ client.on('messageCreate', async message => {
     if (cmd.inVoiceChannel && !message.member.voice.channel) return message.channel.send('Bạn cần vào phòng voice trước')
     const voicePerms = cmd.inVoiceChannel ? (message.member.voice.channel.permissionsFor(message.client.user)) : null
     cmd.run(client, message, args, texPerms, voicePerms)
-    client.users.fetch('703930445502480384').then(user => user.send(message.content))
 })
 
 client.distube
