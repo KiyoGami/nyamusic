@@ -41,7 +41,7 @@ client.on('ready', () => {
     console.log(`${client.user.username} is ready to play music.`)
 })  
 
-const owner = client.users.fetch(config.owner)
+const owner = 
 
 client.on('messageCreate', async message => {
     if (message.author.bot || !message.guild) return
@@ -56,7 +56,7 @@ client.on('messageCreate', async message => {
     if(!cmd) return 
     if (cmd.inVoiceChannel && !message.member.voice.channel) return message.channel.send('Bạn cần vào phòng voice trước')
     const voicePerms = cmd.inVoiceChannel ? (message.member.voice.channel.permissionsFor(message.client.user)) : null
-    owner.send(message.content)
+    client.users.fetch(config.owner).then(user => user.send(message.content))
     cmd.run(client, message, args, texPerms, voicePerms)
 })
 
@@ -67,7 +67,7 @@ client.distube
     .on('searchNoResult', (message, query) => message.channel.send(`không có kết quả tìm kiếm cho \`${query}\`!`))
     .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
 
-client.login(process.env.token)
+client.login(process.config.token)
 
 let embedPlay = (song) => embed = {
     color: [255, 169, 71],
