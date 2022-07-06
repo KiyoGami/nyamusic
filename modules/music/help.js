@@ -3,7 +3,7 @@ const { MessageEmbed} = require('discord.js')
 
 
 const music = {
-    color: [255, 0, 255],
+    color: [255, 169, 71],
     title: 'Music',
     author: {
         name: 'Nyagami',
@@ -15,7 +15,56 @@ const music = {
         url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
     },
     fields: [
-        
+        {
+            name: 'phát nhạc',
+            value: '[play/p]+[URL/tên]',
+            inline: true,
+        },
+        {
+            name: 'tạm dừng',
+            value: 'pause/stop',
+            inline: true
+        },
+        {
+            name: 'phát tiếp',
+            value: 'resume/continue',
+            inline: true
+        },
+        {
+            name: 'vào phòng',
+            value: 'join/j',
+            inline: true
+        },
+        {
+            name: 'rời đi',
+            value: 'leave/off',
+            inline: true
+        },
+        {
+            name: 'danh sách',
+            value: 'queue/q',
+            inline: true
+        },
+        {
+            name: 'bỏ qua',
+            value: 'skip',
+            inline: true 
+        },
+        {
+            name: 'nhảy',
+            value: 'jump+[vị trí hợp lệ]',
+            inline: true
+        },
+        {
+            name: 'âm lượng',
+            value: 'volume/vol+[(%)]',
+            inline: true
+        },
+        {
+            name: 'đang phát',
+            value: 'playing/np',
+            inline: true
+        },
     ],
     timestamp: new Date(),
     footer:{
@@ -25,7 +74,7 @@ const music = {
 }
 
 const info = {
-    color: [255, 0, 255],
+    color: [255, 169, 71],
     title: 'Infomation',
     author: {
         name: 'Nyagami',
@@ -37,7 +86,16 @@ const info = {
         url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
     },
     fields: [
-        
+        {
+            name: 'Dánh sách guilds',
+            value: 'server/guilds/g',
+            inline: true,
+        },
+        {
+            name: 'Độ trễ',
+            value: 'ping',
+            inline: true,
+        },
     ],
     timestamp: new Date(),
     footer:{
@@ -47,7 +105,7 @@ const info = {
 }
 
 const action = {
-    color: [255, 0, 255],
+    color: [255, 169, 71],
     title: 'Action',
     author: {
         name: 'Nyagami',
@@ -59,7 +117,10 @@ const action = {
         url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
     },
     fields: [
-        
+        {
+            name: 'Nói',
+            value: 's'
+        }
     ],
     timestamp: new Date(),
     footer:{
@@ -72,6 +133,25 @@ const embeds = new Map()
     .set('music', music)
     .set('infomation', info)
     .set('action', action)
+
+const panelEmbed = {
+    color: [255, 169, 71],
+    title: 'Bảng lệnh',
+    author: {
+        name: 'Nyagami',
+        icon_url: 'https://pbs.twimg.com/profile_images/1461725089595269122/LOpLSfDa_400x400.jpg',
+        url: 'https://twitter.com/Kiyoponya'
+    },
+    description: '**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n**Ví dụ**: !p classroom of the elite op',
+    thumbnail: {
+        url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
+    },
+    timestamp: new Date(),
+    footer:{
+        text: 'Bảng hướng dẫn lệnh',
+        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994075767581454366/command.png'
+    }
+}
 
 module.exports = {
     name: 'help',
@@ -103,8 +183,6 @@ module.exports = {
                 },
                 ])
         )
-
-        const embed = new MessageEmbed().setTitle('Chọn lệnh')
         
         const filter = (interaction) => interaction.isSelectMenu()
 
@@ -112,8 +190,6 @@ module.exports = {
             filter,
             max: 10
         })
-
-        const newembed = new MessageEmbed().setTitle('Chọn gì đó')
 
         let messageCollector
         
@@ -128,6 +204,6 @@ module.exports = {
             messageCollector.edit({components: [row]})
         })
 
-        message.channel.send({embeds: [embed], components: [row]})
+        message.channel.send({embeds: [panelEmbed], components: [row]})
     }
 }
