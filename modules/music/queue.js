@@ -7,8 +7,7 @@ module.exports = {
     run: async (client, message) => {
         queue = client.distube.getQueue(message)
         if(!queue) return message.channel.send('Không có bài hát nào trong hàng chờ.')
-        const array = embedsQueue(queue.songs)
-        pageExcute(message, array)
+        pageExcute(message, embedsQueue(queue.songs))
     }
 }
 

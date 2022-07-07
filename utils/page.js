@@ -9,7 +9,7 @@ module.exports = async (message, embeds) => {
     await msg.react(config.emmoji.last)
 
     const collector = msg.createReactionCollector({
-        time: 30000,
+        time: 60000,
         dispose: true
     })
 

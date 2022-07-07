@@ -1,7 +1,7 @@
 const config = require('../../config.json')
 module.exports = {
     name: 'skip',
-    aliases: [],
+    aliases: ['next'],
     inVoiceChannel: true,
     run:async (client, message) => {
         const queue = client.distube.getQueue(message)

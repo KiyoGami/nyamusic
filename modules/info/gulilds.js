@@ -7,8 +7,7 @@ module.exports = {
     run:async (client, message) => {
         const cache = client.guilds.cache
         const guilds = cache.map(data => data)
-        const array = embedGuilds(guilds)
-        pageExcute(message, array)
+        pageExcute(message, embedGuilds(guilds))
     }
 }   
 

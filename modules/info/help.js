@@ -34,12 +34,12 @@ const musicCommmands = [
     },
     {
         name: 'bỏ qua',
-        value: '\`skip\`',
+        value: '\`skip/next\`',
         inline: true 
     },
     {
         name: 'nhảy',
-        value: '\`jump\`+[vị trí hợp lệ]',
+        value: '\`jump\`+[vị trí]',
         inline: true
     },
     {
@@ -48,10 +48,21 @@ const musicCommmands = [
         inline: true
     },
     {
+        name: 'tìm kiếm',
+        value: '\`search/ss\`',
+        inline: true
+    },
+    {
+        name:'\u200b',
+        value: '\u200b',
+        inline: true
+    },
+    {
         name: 'đang phát',
         value: '\`playing/np\`',
         inline: true
     },
+    
 ]
 const infoCommands  = [
     {
@@ -86,7 +97,7 @@ const embedCommands = (title, commands, footer) => embed = {
         icon_url: config.ownerAvatar,
         url: config.ownerTwitter,
     },
-    description: `**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n\n**Ví dụ**: \`~p Youzitsu Opening\`
+    description: `**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n**Ví dụ**: \`~p Youzitsu Opening\`
                     --------------------------------------`,
     thumbnail: {
         url: config.botAvatar

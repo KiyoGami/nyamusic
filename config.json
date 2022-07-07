@@ -24,6 +24,7 @@
         "skip": "https://cdn.discordapp.com/attachments/993937119355609139/994154718148440084/right.png",
         "pause": "https://cdn.discordapp.com/attachments/993937119355609139/994437899565142086/pause.png",
         "volume": "https://cdn.discordapp.com/attachments/993937119355609139/994524301132828722/high-volume.png",
+        "search": "https://cdn.discordapp.com/attachments/993937119355609139/994627421540192276/loupe.png",
         "guilds": "https://cdn.discordapp.com/attachments/993937119355609139/994442889180500028/clipboard.png"
     }
 }
