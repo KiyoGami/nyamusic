@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'queue',
     aliases: ['q'],
@@ -9,28 +10,23 @@ module.exports = {
         let currentPage = 0
         const msg = await message.channel.send({embeds: [q[currentPage]]})
 
-        await msg.react('⏪')
-        await msg.react('⬅️')
-        await msg.react('➡️')
-        await msg.react('⏩')
-
-        const collector = msg.createReactionCollector({
-            time: 20000,
-            dispose: true
-        })
-
+        await msg.react(config.emmoji.first)
+        await msg.react(config.emmoji.previous)
+        await msg.react(config.emmoji.next)
+        await msg.react(config.emmoji.last)
+        
         function pageMove(reaction){
             switch(reaction.emoji.name){
-                case '⏪':
+                case config.emmoji.first:
                     if(currentPage != 0) msg.edit({embeds: [q[currentPage = 0]]})
                     break;
-                case '⬅️':
+                case config.emmoji.previous:
                     if(currentPage != 0) msg.edit({embeds: [q[--currentPage]]})
                     break;
-                case '➡️':
+                case config.emmoji.next:
                     if(currentPage != q.length - 1) msg.edit({embeds: [q[++currentPage]]})
                     break;
-                case '⏩':
+                case config.emmoji.last:
                     if(currentPage != q.length - 1) msg.edit({embeds: [q[currentPage = q.length - 1]]})
                     break;
                 default:
@@ -38,7 +34,12 @@ module.exports = {
             }
             collector.resetTimer()
         }
-        
+
+        const collector = msg.createReactionCollector({
+            time: 30000,
+            dispose: true
+        })
+            
         collector
             .on('collect', reaction => pageMove(reaction))
             .on('remove', reaction => pageMove(reaction))
@@ -54,10 +55,10 @@ function embedsQueue(songs){
         lastindex += 10
         const listSong = page.map((song, index) => `${index+i}. **${song.name}** - \`${song.formattedDuration}\` ${index + i == 0 ? '▶️' : ''}`).join('\n\n')
         embed = {
-            color: [255, 169, 71],
-            title: 'Hàng chờ',
+            color: config.botColor,
+            title: '~Hàng chờ~',
             thumbnail: {
-                url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
+                url: config.botAvatar
             },
             description: `${listSong}`,
             footer:{

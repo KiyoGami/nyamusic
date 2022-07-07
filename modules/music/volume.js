@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'volume',
     aliases: ['vol'],
@@ -10,6 +11,13 @@ module.exports = {
         else percent = Number(args[0])
         if (isNaN(percent)) return message.channel.send(`Âm lượng không hợp lệ`)
         client.distube.setVolume(message, percent)
-        message.channel.send(`Đã chỉnh volume thành ${percent}%.`)
+        embed = {
+            color: message.member.displayColor,
+            author: {
+                icon_url : config.icon.volume,
+                name: `Đã chỉnh volume thành ${percent}%.`
+            }
+        }
+        message.channel.send({embeds: [embed]})
     }
 }

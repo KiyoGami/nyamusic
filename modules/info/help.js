@@ -1,161 +1,107 @@
 const { MessageActionRow, MessageSelectMenu} = require('discord.js');
+const config = require('../../config.json')
 
-const music = {
-    color: [255, 169, 71],
-    title: 'Music',
-    author: {
-        name: 'Nyagami',
-        icon_url: 'https://pbs.twimg.com/profile_images/1461725089595269122/LOpLSfDa_400x400.jpg',
-        url: 'https://twitter.com/Kiyoponya'
+const musicCommmands = [
+    {
+        name: 'phát nhạc',
+        value: '\`play/p\`+[URL/tên]',
+        inline: true,
     },
-    description: 'Sử dụng các lệnh kèm tuỳ chọn (nếu có)',
-    thumbnail: {
-        url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
+    {
+        name: 'tạm dừng',
+        value: '\`pause/stop\`',
+        inline: true
     },
-    fields: [
-        {
-            name: 'phát nhạc',
-            value: '[play/p]+[URL/tên]',
-            inline: true,
-        },
-        {
-            name: 'tạm dừng',
-            value: 'pause/stop',
-            inline: true
-        },
-        {
-            name: 'phát tiếp',
-            value: 'resume/continue',
-            inline: true
-        },
-        {
-            name: 'vào phòng',
-            value: 'join/j',
-            inline: true
-        },
-        {
-            name: 'rời đi',
-            value: 'leave/off',
-            inline: true
-        },
-        {
-            name: 'danh sách',
-            value: 'queue/q',
-            inline: true
-        },
-        {
-            name: 'bỏ qua',
-            value: 'skip',
-            inline: true 
-        },
-        {
-            name: 'nhảy',
-            value: 'jump+[vị trí hợp lệ]',
-            inline: true
-        },
-        {
-            name: 'âm lượng',
-            value: 'volume/vol+[(%)]',
-            inline: true
-        },
-        {
-            name: 'đang phát',
-            value: 'playing/np',
-            inline: true
-        },
-    ],
-    timestamp: new Date(),
-    footer:{
-        text: 'Bảng lệnh âm nhạc',
-        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/993940553626566827/music_1.png'
-    }
-}
+    {
+        name: 'phát tiếp',
+        value: '\`resume/continue\`',
+        inline: true
+    },
+    {
+        name: 'vào phòng',
+        value: '\`join/j\`',
+        inline: true
+    },
+    {
+        name: 'rời đi',
+        value: '\`leave/off\`',
+        inline: true
+    },
+    {
+        name: 'danh sách',
+        value: '\`queue/q\`',
+        inline: true
+    },
+    {
+        name: 'bỏ qua',
+        value: '\`skip\`',
+        inline: true 
+    },
+    {
+        name: 'nhảy',
+        value: '\`jump\`+[vị trí hợp lệ]',
+        inline: true
+    },
+    {
+        name: 'âm lượng',
+        value: '\`volume/vol\`+[(%)]',
+        inline: true
+    },
+    {
+        name: 'đang phát',
+        value: '\`playing/np\`',
+        inline: true
+    },
+]
+const infoCommands  = [
+    {
+        name: 'Trợ giúp',
+        value: '\`help/h\`',
+        inline: true,
+    },
+    {
+        name: 'Dánh sách guilds',
+        value: '\`servers/guilds/g\`',
+        inline: true,
+    },
+    {
+        name: 'Độ trễ',
+        value: '\`ping\`',
+        inline: true,
+    },
+    {
+        name: 'Đang sử dụng',
+        value: '\`nowusing/nu/using\`',
+        inline: true,
+    },
+]
 
-const info = {
-    color: [255, 169, 71],
-    title: 'Infomation',
-    author: {
-        name: 'Nyagami',
-        icon_url: 'https://pbs.twimg.com/profile_images/1461725089595269122/LOpLSfDa_400x400.jpg',
-        url: 'https://twitter.com/Kiyoponya'
-    },
-    description: 'Sử dụng các lệnh kèm tuỳ chọn (nếu có)',
-    thumbnail: {
-        url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
-    },
-    fields: [
-        {
-            name: 'Trợ giúp',
-            value: 'help/h',
-            inline: true,
-        },
-        {
-            name: 'Dánh sách guilds',
-            value: 'servers/guilds/g',
-            inline: true,
-        },
-        {
-            name: 'Độ trễ',
-            value: 'ping',
-            inline: true,
-        },
-    ],
-    timestamp: new Date(),
-    footer:{
-        text: 'Bảng lệnh thông tin',
-        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/993941061338660944/information.png'
-    }
-}
+const actionCommands = [{name: 'Nói', value: '\`s\`+[...]', inline: true,}]
 
-const action = {
-    color: [255, 169, 71],
-    title: 'Action',
+const embedCommands = (title, commands, footer) => embed = {
+    color: config.botColor,
+    title: title,
     author: {
-        name: 'Nyagami',
-        icon_url: 'https://pbs.twimg.com/profile_images/1461725089595269122/LOpLSfDa_400x400.jpg',
-        url: 'https://twitter.com/Kiyoponya'
+        name: config.ownerName,
+        icon_url: config.ownerAvatar,
+        url: config.ownerTwitter,
     },
-    description: 'Sử dụng các lệnh kèm tuỳ chọn (nếu có)',
+    description: `**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n\n**Ví dụ**: \`!p Youzitsu Opening\`
+                    --------------------------------------`,
     thumbnail: {
-        url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
+        url: config.botAvatar
     },
-    fields: [
-        {
-            name: 'Nói',
-            value: 's'
-        }
-    ],
+    fields: commands,   
     timestamp: new Date(),
-    footer:{
-        text: 'Bảng lệnh hành động',
-        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/993941061565161512/people.png'
-    }
+    footer: footer
 }
 
 const Embeds = new Map()
-    .set('music', music)
-    .set('infomation', info)
-    .set('action', action)
-
-const panelEmbed = {
-    color: [255, 169, 71],
-    title: 'Bảng lệnh',
-    author: {
-        name: 'Nyagami',
-        icon_url: 'https://pbs.twimg.com/profile_images/1461725089595269122/LOpLSfDa_400x400.jpg',
-        url: 'https://twitter.com/Kiyoponya'
-    },
-    description: '**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n**Ví dụ**: !p classroom of the elite op',
-    thumbnail: {
-        url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
-    },
-    timestamp: new Date(),
-    footer:{
-        text: 'Bảng hướng dẫn lệnh',
-        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994075767581454366/command.png'
-    }
-}
-
+    .set('music', embedCommands('Muic', musicCommmands, {text: 'Bảng lệnh âm nhạc', icon_url: config.icon.mussicCommand}))
+    .set('infomation', embedCommands('Infomation', infoCommands, {text: 'Bảng lệnh thông tin', icon_url: config.icon.infoCommand}))
+    .set('action', embedCommands('Action', actionCommands, {text: 'Bảng lệnh hành động', icon_url: config.icon.actionCommand}))
+    .set('pannel', embedCommands('Bảng lệnh', [], {text: 'Bảng hướng dẫn lệnh', icon_url: config.icon.helpPannel}))
+    
 module.exports = {
     name: 'help',
     aliases: ['h'],
@@ -163,41 +109,39 @@ module.exports = {
     run: async (client, message) => {
         let row = new MessageActionRow().addComponents(
             new MessageSelectMenu()
-                .setCustomId('pannel')
-                .setDisabled(false)
-                .setPlaceholder('Bảng lệnh')
-                .setOptions([{
-                    label: "music",
-                    value: "music",
-                    description: "các lệnh về âm nhạc",
-                    emoji: "🎧"
-                },
-                {
-                    label: "info",
-                    value: "infomation",
-                    description: "các lệnh về thông tin",
-                    emoji: "🌐"
-                },
-                {
-                    label: "action",
-                    value: "action",
-                    description: "các lệnh về hành động",
-                    emoji: "🔻"
-                },
-                ])
+            .setCustomId('pannel')
+            .setDisabled(false)
+            .setPlaceholder('Bảng lệnh')
+            .setOptions([{
+                label: "music",
+                value: "music",
+                description: "các lệnh về âm nhạc",
+                emoji: "🎧"
+            },
+            {
+                label: "info",
+                value: "infomation",
+                description: "các lệnh về thông tin",
+                emoji: "🌐"
+            },
+            {
+                label: "action",
+                value: "action",
+                description: "các lệnh về hành động",
+                emoji: "🔻"
+            },
+            ])
         )
 
-        const msg = await message.channel.send({embeds: [panelEmbed], components: [row]})
+        const msg = await message.channel.send({embeds: [Embeds.get('pannel')], components: [row]})
 
         const collector = msg.createMessageComponentCollector({
             componentType: 'SELECT_MENU',
-            time: 20000,
+            time: 30000,
         })
         
         collector.on('collect', async interaction => {
-            interaction.update({
-                embeds: [Embeds.get(interaction.values[0])]
-            })
+            interaction.update({embeds: [Embeds.get(interaction.values[0])]})
             collector.resetTimer()
         })
 

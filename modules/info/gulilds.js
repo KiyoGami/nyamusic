@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'guilds',
     aliases: ['g', 'servers'],
@@ -9,28 +10,28 @@ module.exports = {
         let currentPage = 0
         const msg = await message.channel.send({embeds: [q[currentPage]]})
 
-        await msg.react('⏪')
-        await msg.react('⬅️')
-        await msg.react('➡️')
-        await msg.react('⏩')
+        await msg.react(config.emmoji.first)
+        await msg.react(config.emmoji.previous)
+        await msg.react(config.emmoji.next)
+        await msg.react(config.emmoji.last)
 
         const collector = msg.createReactionCollector({
-            time: 20000,
+            time: 30000,
             dispose: true
         })
 
         function pageMove(reaction){
             switch(reaction.emoji.name){
-                case '⏪':
+                case config.emmoji.first:
                     if(currentPage != 0) msg.edit({embeds: [q[currentPage = 0]]})
                     break;
-                case '⬅️':
+                case config.emmoji.previous:
                     if(currentPage != 0) msg.edit({embeds: [q[--currentPage]]})
                     break;
-                case '➡️':
+                case config.emmoji.next:
                     if(currentPage != q.length - 1) msg.edit({embeds: [q[++currentPage]]})
                     break;
-                case '⏩':
+                case config.emmoji.last:
                     if(currentPage != q.length - 1) msg.edit({embeds: [q[currentPage = q.length - 1]]})
                     break;
                 default:
@@ -52,17 +53,17 @@ function embedGuilds(guilds){
     for(let i=0; i < guilds.length; i += 10){
         let page = guilds.slice(i, lastindex)
         lastindex += 10
-        const listGuilds = page.map((guild, index) => `${index+i+1}. **${guild.name}**`).join('\n\n')
+        const listGuilds = page.map((guild, index) => `${index+i+1}. \`${guild.name}\``).join('\n\n')
         embed = {
             color: [255, 169, 71],
             title: 'Danh sách servers',
             thumbnail: {
-                url: 'https://media.discordapp.net/attachments/993937119355609139/993937338268930078/KeiChibi.jpg'
+                url: config.botAvatar
             },
             description: `${listGuilds}`,
             footer:{
                 text: `Trang ${i/10 + 1}/${guilds.length % 10 == 0 ? guilds.length/10 : (guilds.length - guilds.length % 10)/10 + 1}`,
-                icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994442889180500028/clipboard.png'
+                icon_url: config.icon.guilds
             }
         }
         pages.push(embed)

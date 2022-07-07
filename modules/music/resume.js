@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'resume',
     aliases: ['continue'],
@@ -8,7 +9,7 @@ module.exports = {
         embed = {
             color: message.member.displayColor,
             author: {
-                icon_url : 'https://cdn.discordapp.com/attachments/993937119355609139/994119008884359198/play-button.png',
+                icon_url : config.icon.playing,
                 name: `Tiếp tục phát - ${message.member.displayName}`
             }
         }

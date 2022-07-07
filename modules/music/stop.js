@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'stop',
     aliases: ['pause'],
@@ -7,7 +8,7 @@ module.exports = {
         embed = {
             color: message.member.displayColor,
             author: {
-                icon_url : 'https://cdn.discordapp.com/attachments/993937119355609139/994437899565142086/pause.png',
+                icon_url : config.icon.pause,
                 name: `Tạm dừng phát nhạc - ${message.member.displayName}`
             }
         }

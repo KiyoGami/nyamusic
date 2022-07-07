@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'playing',
     aliases: ['np'],
@@ -17,7 +18,7 @@ module.exports = {
             timestamp: new Date(),
             footer:{
                 text: 'Đang phát',
-                icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994119008884359198/play-button.png'
+                icon_url: config.icon.playing
             }               
         }
         message.channel.send({embeds: [embed]})

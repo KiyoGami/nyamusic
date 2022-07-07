@@ -1,3 +1,4 @@
+const config = require('../../config.json')
 module.exports = {
     name: 'skip',
     aliases: [],
@@ -10,7 +11,7 @@ module.exports = {
         let embed = {
             color: message.member.displayColor,
             author: {
-                icon_url : 'https://cdn.discordapp.com/attachments/993937119355609139/994154718148440084/right.png',
+                icon_url : config.icon.skip,
                 name: `Skip thành công - ${message.member.displayName}`
             }
         }

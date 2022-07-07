@@ -55,47 +55,30 @@ client.on('messageCreate', async message => {
     if(!cmd) return 
     if (cmd.inVoiceChannel && !message.member.voice.channel) return message.channel.send('Bạn cần vào phòng voice trước')
     const voicePerms = cmd.inVoiceChannel ? (message.member.voice.channel.permissionsFor(message.client.user)) : null
-    client.users.fetch(config.owner).then(user => user.send(message.content))
+    client.users.fetch(config.ownerID).then(user => user.send(message.content))
     cmd.run(client, message, args, texPerms, voicePerms)
 })
 
 client.distube
-    .on('addList', (queue, playlist) => queue.textChannel.send({embeds: [embedAdd(playlist, 'danh sách')]}))
-    .on('addSong', (queue, song) => queue.textChannel.send({embeds: [embedAdd(song, 'bài hát')]}))
-    .on('playSong', (queue, song) => queue.textChannel.send({embeds: [embedPlay(song)]}))
+    .on('addList', (queue, playlist) => queue.textChannel.send({embeds: [embedEvent(playlist, {text: `Đã thêm danh sách`, icon_url: config.icon.add}, 'Thêm danh sách')]}))
+    .on('addSong', (queue, song) => queue.textChannel.send({embeds: [embedEvent(song, {text: 'Đã thêm bài hát', icon_url: config.icon.add},'Thêm bài hát')]}))
+    .on('playSong', (queue, song) => queue.textChannel.send({embeds: [embedEvent(song, {text: 'Đang phát', icon_url: config.icon.playing}, 'Đang phát')]}))
     .on('searchNoResult', (message, query) => message.channel.send(`không có kết quả tìm kiếm cho \`${query}\`!`))
     .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
 
 client.login(process.env.token)
 
-let embedPlay = (song) => embed = {
+let embedEvent = (song, footer, event) => embed = {
     color: song.member.displayColor,
-    title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),
-    url: song.url,   
-    description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**`,
+    author: {name: event},
+    title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),    
+    url: song.url, 
     thumbnail: {
         url: song.thumbnail,
     },
     timestamp: new Date(),
-    footer:{
-        text: 'Đang phát',
-        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994119008884359198/play-button.png'
-    }   
-}
-
-let embedAdd = (song, type) => embed = {
-    color: song.member.displayColor,
-    author: {name: `Thêm ${type}`},
-    title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),
-    url: song.url,   
-    description: `Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`\nTiêu đề đầy đủ: **${song.name}**\n
-                  Số lượng: \`${type == 'bài hát' ? 1 : song.songs.length}\``,
-    thumbnail: {
-        url: song.thumbnail,
-    },
-    timestamp: new Date(),
-    footer:{
-        text: `Đã thêm ${type}`,
-        icon_url: 'https://cdn.discordapp.com/attachments/993937119355609139/994146286146175046/plus-sign.png'
-    }   
+    footer: footer,
+    description:`Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`
+                 Tiêu đề đầy đủ: **${song.name}**
+                 Số lượng: \`${event == 'Thêm danh sách' ? song.songs.length : 1}\``
 }
