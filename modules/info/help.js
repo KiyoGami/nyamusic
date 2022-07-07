@@ -86,7 +86,7 @@ const embedCommands = (title, commands, footer) => embed = {
         icon_url: config.ownerAvatar,
         url: config.ownerTwitter,
     },
-    description: `**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n\n**Ví dụ**: \`!p Youzitsu Opening\`
+    description: `**Dùng lệnh**: [prefix][lệnh] [tuỳ chọn]\n\n**Ví dụ**: \`~p Youzitsu Opening\`
                     --------------------------------------`,
     thumbnail: {
         url: config.botAvatar
