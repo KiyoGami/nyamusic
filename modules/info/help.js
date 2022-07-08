@@ -93,6 +93,11 @@ const actionCommands = [
         value: '\`s\`+[...]', 
         inline: true,
     },
+    {
+        name: 'Nói ở',
+        value: '\`sc\`+\`channel\`+[...]', 
+        inline: true,
+    },
     {name: 'action', value: 'baka', inline: true},
     {name: 'action', value: 'bite', inline: true},
     {name: 'action', value: 'blush', inline: true},
@@ -105,7 +110,6 @@ const actionCommands = [
     {name: 'action', value: 'lick', inline: true},
     {name: 'action', value: 'mad', inline: true},
     {name: 'action', value: 'pat', inline: true},
-    {name: 'action', value: 'smoke', inline: true},
     {name: 'action', value: '..v..v', inline: true},
 
 ]
