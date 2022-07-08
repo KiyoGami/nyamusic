@@ -87,7 +87,28 @@ const infoCommands  = [
     },
 ]
 
-const actionCommands = [{name: 'Nói', value: '\`s\`+[...]', inline: true,}]
+const actionCommands = [
+    {
+        name: 'Nói',
+        value: '\`s\`+[...]', 
+        inline: true,
+    },
+    {name: 'action', value: 'baka', inline: true},
+    {name: 'action', value: 'bite', inline: true},
+    {name: 'action', value: 'blush', inline: true},
+    {name: 'action', value: 'cry', inline: true},
+    {name: 'action', value: 'cute', inline: true},
+    {name: 'action', value: 'fbi', inline: true},
+    {name: 'action', value: 'hug', inline: true},
+    {name: 'action', value: 'kiss', inline: true},
+    {name: 'action', value: 'laugh', inline: true},
+    {name: 'action', value: 'lick', inline: true},
+    {name: 'action', value: 'mad', inline: true},
+    {name: 'action', value: 'pat', inline: true},
+    {name: 'action', value: 'smoke', inline: true},
+    {name: 'action', value: '..v..v', inline: true},
+
+]
 
 const embedCommands = (title, commands, footer) => embed = {
     color: config.botColor,
