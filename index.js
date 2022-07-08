@@ -1,8 +1,8 @@
 const Discord = require(`discord.js`)
 const { DisTube, default: dist } = require('distube')
 const fs = require('fs');
-const { title } = require('process');
 const config = require(`./config.json`)
+const embedSong = require('./utils/songEmbed')
 
 const prefix = config.prefix;
 
@@ -60,25 +60,9 @@ client.on('messageCreate', async message => {
 })
 
 client.distube
-    .on('addList', (queue, playlist) => queue.textChannel.send({embeds: [embedEvent(playlist, {text: `Đã thêm danh sách`, icon_url: config.icon.add}, 'Thêm danh sách')]}))
-    .on('addSong', (queue, song) => queue.textChannel.send({embeds: [embedEvent(song, {text: 'Đã thêm bài hát', icon_url: config.icon.add},'Thêm bài hát')]}))
-    .on('playSong', (queue, song) => queue.textChannel.send({embeds: [embedEvent(song, {text: 'Đang phát', icon_url: config.icon.playing}, 'Đang phát')]}))
-    .on('searchNoResult', (message, query) => message.channel.send(`không có kết quả tìm kiếm cho \`${query}\`!`))
+    .on('addList', (queue, playlist) => queue.textChannel.send({embeds: [embedSong(playlist, config.icon.add, 'Thêm danh sách', playlist.songs.length)]}))
+    .on('addSong', (queue, song) => queue.textChannel.send({embeds: [embedSong(song, config.icon.add, 'Thêm bài hát', 0)]}))
+    .on('playSong', (queue, song) => queue.textChannel.send({embeds: [embedSong(song, config.icon.playing, 'Đang phát', 0)]}))
     .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
 
 client.login(process.env.token)
-
-let embedEvent = (song, footer, event) => embed = {
-    color: song.member.displayColor,
-    author: {name: event},
-    title: (song.name.length < 30) ? song.name :(song.name.slice(0, 30) +'...'),    
-    url: song.url, 
-    thumbnail: {
-        url: song.thumbnail,
-    },
-    timestamp: new Date(),
-    footer: footer,
-    description:`Người yêu cầu: **${song.user.tag}**\nThời lượng: \`${song.formattedDuration}\`
-                 Tiêu đề đầy đủ: **${song.name}**
-                 Số lượng: \`${event == 'Thêm danh sách' ? song.songs.length : 1}\``
-}

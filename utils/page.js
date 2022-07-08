@@ -8,7 +8,10 @@ module.exports = async (message, embeds) => {
     await msg.react(config.emmoji.next)
     await msg.react(config.emmoji.last)
 
+    const filter = (reaction, user) => [config.emmoji.first, config.emmoji.previous, config.emmoji.next, config.emmoji.last].includes(reaction.emoji.name)
+
     const collector = msg.createReactionCollector({
+        filter,
         time: 60000,
         dispose: true
     })
