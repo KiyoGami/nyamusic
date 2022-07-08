@@ -27,7 +27,7 @@ module.exports = {
 
                 collector.on('end', async () => await message.reply({content: 'Đã dừng tìm kiếm!', allowedMentions: {userReplied: false}})) 
             })
-            .catch()
+            .catch(err => message.channel.send('Không có kết quả tìm kiếm!'))
     }
 }  
 
