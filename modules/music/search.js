@@ -30,7 +30,7 @@ module.exports = {
                     }else{
                         num = Number(string)
                         if(isNaN(num) || num >= songs.length) return message.channel.send('Số không hợp lệ! Vui lòng nhập lại hoặc \`deny\` để dừng')
-                        else await client.distube.play(message.member.voice.channel, songs[num].name, {
+                        else await client.distube.play(message.member.voice.channel, songs[num].url, {
                             member: message.member,
                             textChannel: message.channel,
                         })
@@ -40,6 +40,7 @@ module.exports = {
 
                 collector.on('end', async () => await message.reply({content: 'Đã dừng tìm kiếm!', allowedMentions: {userReplied: false}})) 
             })
+            .catch((err) => message.channel.send('Không tìm thấy bài hát yêu cầu!'))
     }
 }  
 
