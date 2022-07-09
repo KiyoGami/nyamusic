@@ -1,4 +1,4 @@
-const token = '703930445502480384.6anv4v1JgbDOEuWFra1E'
+const token = process.env.token
 const config = require('../config.json')
 const { Kawaii } = require('kawaii-api');
 const api = new Kawaii(token);

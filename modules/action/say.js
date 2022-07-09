@@ -3,8 +3,9 @@ module.exports = {
     aliases: [],
     inVoiceChannel: false,
     run:async (client, message, args) => {
+        const texPerms = message.channel.permissionsFor(message.client.user)
         string = args.join(' ')
-        message.delete()
+        if(texPerms.has('MANAGE_MESSAGES')) message.delete()
         if(string.length) message.channel.send(string)
     }
 }   

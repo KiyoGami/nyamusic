@@ -25,6 +25,9 @@
         "pause": "https://cdn.discordapp.com/attachments/993937119355609139/994437899565142086/pause.png",
         "volume": "https://cdn.discordapp.com/attachments/993937119355609139/994524301132828722/high-volume.png",
         "search": "https://cdn.discordapp.com/attachments/993937119355609139/994627421540192276/loupe.png",
+        "server": "https://cdn.discordapp.com/attachments/993937119355609139/995150866954850424/user.png",
+        "role": "https://cdn.discordapp.com/attachments/993937119355609139/995210229744681040/human-resources.png",
+        "avatar": "https://cdn.discordapp.com/attachments/993937119355609139/995249511347789965/user_1.png",
         "guilds": "https://cdn.discordapp.com/attachments/993937119355609139/994442889180500028/clipboard.png"
     }
 }

@@ -85,6 +85,21 @@ const infoCommands  = [
         value: '\`nowusing/nu/using\`',
         inline: true,
     },
+    {
+        name: 'Server info',
+        value: '\`server/sv\`',
+        inline: true,
+    },
+    {
+        name: 'Role info',
+        value: '\`role\`+[...]',
+        inline: true,
+    },
+    {
+        name: 'Avatar',
+        value: '\`avatar/avt\`',
+        inline: true,
+    },
 ]
 
 const actionCommands = [
@@ -133,7 +148,7 @@ const embedCommands = (title, commands, footer) => embed = {
 }
 
 const Embeds = new Map()
-    .set('music', embedCommands('Muic', musicCommmands, {text: 'Bảng lệnh âm nhạc', icon_url: config.icon.mussicCommand}))
+    .set('music', embedCommands('Music', musicCommmands, {text: 'Bảng lệnh âm nhạc', icon_url: config.icon.mussicCommand}))
     .set('infomation', embedCommands('Infomation', infoCommands, {text: 'Bảng lệnh thông tin', icon_url: config.icon.infoCommand}))
     .set('action', embedCommands('Action', actionCommands, {text: 'Bảng lệnh hành động', icon_url: config.icon.actionCommand}))
     .set('pannel', embedCommands('Bảng lệnh', [], {text: 'Bảng hướng dẫn lệnh', icon_url: config.icon.helpPannel}))

@@ -47,7 +47,7 @@ client.on('messageCreate', async message => {
     if (!message.content.startsWith(prefix)) return
     const texPerms = message.channel.permissionsFor(message.client.user)
     if(!texPerms.has('SEND_MESSAGES')) return
-    if(!texPerms.has('EMBED_LINKS') || !texPerms.has('MANAGE_MESSAGES')) return message.channel.send('Cần cấp đủ quyền cho tin nhắn!')
+    if(!texPerms.has('EMBED_LINKS')) return message.channel.send('Hãy cho phép role \`everyone\` Embed links (\`/\` hoặc \`✅\`) ở kênh này!')   
     let args = message.content.slice(prefix.length).split(/ +/g)
     if(!args) return  
     const command = args.shift().toLowerCase()
