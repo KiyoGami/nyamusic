@@ -14,7 +14,13 @@ module.exports = {
             roleArray.sort((a,b) => b.pos - a.pos)
             pageExcute(message, embedRoles(roleArray))
         }else{
-            roleName = args.shift().toLowerCase()
+            roleName = args.map(str => str.toLowerCase()).join(' ')
+            if(roleName == 'everyone') roleName = '@' + roleName
+            if(roleName.startsWith('<')){
+                roleName = roleName.slice(3, roleName.length - 1)
+                const role = await message.guild.roles.fetch(roleName)
+                roleName = role.name.toLowerCase()
+            }
             roleFind = roleMap.get(roleName)
             if(!roleFind) return message.channel.send('Không tìm thấy role nào như vậy!')
             message.guild.roles.fetch(roleFind.id).then((role) => {

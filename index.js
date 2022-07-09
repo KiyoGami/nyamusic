@@ -65,4 +65,4 @@ client.distube
     .on('playSong', (queue, song) => queue.textChannel.send({embeds: [embedSong(song, config.icon.playing, 'Đang phát', 0)]}))
     .on('finish', queue => queue.textChannel.send('Đã hết nhạc!'))
 
-client.login(process.env.token)
+client.login('OTkzNzk3NDQ1MDgxMzg3MDg5.GeA78o.plD-1Y6M5y3J7t6RZO-eCE0q62I3R8PoC7SVgA')
