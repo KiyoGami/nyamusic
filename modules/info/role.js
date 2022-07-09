@@ -1,4 +1,3 @@
-const { Collection } = require('discord.js')
 const config = require('../../config.json')
 const pageExcute = require('../../utils/page.js')
 module.exports = {
@@ -8,7 +7,7 @@ module.exports = {
     run:async (client, message, args) => {
         const cache = message.guild.roles.cache
         const roleMap = new Map()
-        cache.forEach(role => roleMap.set(role.name.toLowerCase(), {"name": role.name, "id": role.id, "pos": role.position}))
+        cache.forEach(role => role.name ? roleMap.set(role.name.toLowerCase(), {"name": role.name, "id": role.id, "pos": role.position}) : null)
         if(!args.length){
             let roleArray = Array.from(roleMap.values())
             roleArray.sort((a,b) => b.pos - a.pos)
@@ -19,7 +18,7 @@ module.exports = {
             if(roleName.startsWith('<')){
                 roleName = roleName.slice(3, roleName.length - 1)
                 const role = await message.guild.roles.fetch(roleName)
-                roleName = role.name.toLowerCase()
+                roleName = role ? role.name.toLowerCase() : ''
             }
             roleFind = roleMap.get(roleName)
             if(!roleFind) return message.channel.send('Không tìm thấy role nào như vậy!')

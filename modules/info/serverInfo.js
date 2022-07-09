@@ -4,7 +4,7 @@ module.exports = {
     aliases: ['sv'],
     inVoiceChannel: false,
     run:async (client, message) => {
-        const guild = message.guild
+        const guild = message.guild 
         const owner = await client.users.fetch(guild.ownerId)
         embed = {
             color: message.member.displayColor,

@@ -87,13 +87,23 @@ const infoCommands  = [
     },
     {
         name: 'Server info',
-        value: '\`server/sv\`',
+        value: '(test)',
         inline: true,
     },
     {
         name: 'Role info',
-        value: '\`role\`+[...]',
+        value: '(test)',
         inline: true,
+    },
+    {
+        name: 'Member info',
+        value: '(test)',
+        inline: true,
+    },
+    {
+        name:'\u200b',
+        value: '\u200b',
+        inline: true
     },
     {
         name: 'Avatar',
@@ -129,6 +139,34 @@ const actionCommands = [
 
 ]
 
+const updateCommands = [
+    {
+        name: 'Music controler',
+        value: 'none', 
+        inline: true,
+    },
+    {
+        name: 'Youzitsu???',
+        value: 'none', 
+        inline: true,
+    },
+    {
+        name: 'Tìm kiếm hình ảnh',
+        value: 'none', 
+        inline: true,
+    },
+    {
+        name: 'Spotify',
+        value: 'none', 
+        inline: true,
+    },
+    {
+        name: '...',
+        value: '...', 
+        inline: true,
+    },
+]
+
 const embedCommands = (title, commands, footer) => embed = {
     color: config.botColor,
     title: title,
@@ -152,7 +190,7 @@ const Embeds = new Map()
     .set('infomation', embedCommands('Infomation', infoCommands, {text: 'Bảng lệnh thông tin', icon_url: config.icon.infoCommand}))
     .set('action', embedCommands('Action', actionCommands, {text: 'Bảng lệnh hành động', icon_url: config.icon.actionCommand}))
     .set('pannel', embedCommands('Bảng lệnh', [], {text: 'Bảng hướng dẫn lệnh', icon_url: config.icon.helpPannel}))
-    
+    .set('upcoming...', embedCommands('Đang phát triển', updateCommands, {text: 'upcoming', icon_url: config.icon.update}))
 module.exports = {
     name: 'help',
     aliases: ['h'],
@@ -180,6 +218,12 @@ module.exports = {
                 value: "action",
                 description: "các lệnh về hành động",
                 emoji: "🔻"
+            },
+            {
+                label: "upcoming...",
+                value: "upcoming...",
+                description: "các tính năng đang phát triển",
+                emoji: "❕"
             },
             ])
         )
