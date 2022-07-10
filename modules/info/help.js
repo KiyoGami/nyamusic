@@ -71,11 +71,6 @@ const infoCommands  = [
         inline: true,
     },
     {
-        name: 'Dánh sách guilds',
-        value: '\`servers/guilds/g\`',
-        inline: true,
-    },
-    {
         name: 'Độ trễ',
         value: '\`ping\`',
         inline: true,
