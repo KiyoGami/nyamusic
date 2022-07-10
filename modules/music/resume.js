@@ -13,7 +13,10 @@ module.exports = {
                 name: `Tiếp tục phát - ${message.member.displayName}`
             }
         }
-        queue.resume()
-        message.channel.send({embeds: [embed]})
+        if(queue.playing) message.channel.send('Đang phát nhạc!')
+        else{
+            queue.resume()
+            message.channel.send({embeds: [embed]})
+        }
     }
 }

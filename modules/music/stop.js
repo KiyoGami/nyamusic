@@ -4,7 +4,9 @@ module.exports = {
     aliases: ['pause'],
     inVoiceChannel: true,
     run: async (client, message) => {
-        client.distube.pause(message)
+        const queue = client.distube.getQueue(message)
+        if(!queue || !queue.playing) return message.channel.send('Không có bài hát nào đang phát!')
+        queue.pause()
         embed = {
             color: message.member.displayColor,
             author: {
