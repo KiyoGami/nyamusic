@@ -5,6 +5,7 @@ module.exports = {
     aliases: ['g', 'servers'],
     inVoiceChannel: false,
     run:async (client, message) => {
+        if(message.author.id != config.ownerID) return message.channel.send('Bạn không phải Owner-sama của tôi 😗')
         const cache = client.guilds.cache
         const guilds = cache.map(data => data)
         pageExcute(message, embedGuilds(guilds))
