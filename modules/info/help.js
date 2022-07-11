@@ -53,16 +53,20 @@ const musicCommmands = [
         inline: true
     },
     {
-        name:'\u200b',
-        value: '\u200b',
-        inline: true
-    },
-    {
         name: 'đang phát',
         value: '\`playing/np\`',
         inline: true
     },
-    
+    {
+        name: 'Lặp',
+        value: '\`loop/re\`+[**1**|**s**]/[**2**|**q**]',
+        inline: true
+    },
+    {
+        name: 'Ngưng lặp',
+        value: '\`unl/unre\`',
+        inline: true
+    },
 ]
 const infoCommands  = [
     {
@@ -227,7 +231,7 @@ module.exports = {
 
         const collector = msg.createMessageComponentCollector({
             componentType: 'SELECT_MENU',
-            time: 30000,
+            time: 60000,
         })
         
         collector.on('collect', async interaction => {
