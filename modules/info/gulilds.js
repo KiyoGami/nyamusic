@@ -1,8 +1,8 @@
 const config = require('../../config.json')
 const pageExcute = require('../../utils/page.js')
 module.exports = {
-    name: 'guilds',
-    aliases: ['g', 'servers'],
+    name: 'g',
+    aliases: [],
     inVoiceChannel: false,
     run:async (client, message) => {
         if(message.author.id != config.ownerID) return message.channel.send('Bạn không phải Owner-sama của tôi 😗')
@@ -21,7 +21,10 @@ function embedGuilds(guilds){
         const listGuilds = page.map((guild, index) => `${index+i+1}. \`${guild.name}\``).join('\n\n')
         embed = {
             color: [255, 169, 71],
-            title: 'Danh sách servers',
+            author: {
+                name: 'Danh sách servers'
+            },
+            title: `${guilds.length} servers`,
             thumbnail: {
                 url: config.botAvatar
             },

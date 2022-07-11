@@ -5,9 +5,10 @@ module.exports = {
     aliases: [],
     inVoiceChannel: false,
     run:async (client, message, args) => {
-        const cache = message.guild.roles.cache
-        const roleMap = new Map()
-        cache.forEach(role => role.name ? roleMap.set(role.name.toLowerCase(), {"name": role.name, "id": role.id, "pos": role.position}) : null)
+        guild = message.guild
+        roles = (await message.guild.roles.fetch())
+        roleMap = new Map()
+        roles.forEach(role => role.name ? roleMap.set(role.name.toLowerCase(), {"name": role.name, "id": role.id, "pos": role.position}) : null)
         if(!args.length){
             let roleArray = Array.from(roleMap.values())
             roleArray.sort((a,b) => b.pos - a.pos)
@@ -17,14 +18,16 @@ module.exports = {
             if(roleName == 'everyone') roleName = '@' + roleName
             if(roleName.startsWith('<')){
                 roleName = roleName.slice(3, roleName.length - 1)
-                const role = await message.guild.roles.fetch(roleName)
+                role = await message.guild.roles.fetch(roleName)
                 roleName = role ? role.name.toLowerCase() : ''
             }
             roleFind = roleMap.get(roleName)
-            if(!roleFind) return message.channel.send('Không tìm thấy role nào như vậy!')
-            message.guild.roles.fetch(roleFind.id).then((role) => {
-                message.channel.send({embeds: [embedRole(role, message.guild)]})
-           })
+            guild.roles
+                .fetch(roleFind ? roleFind.id : '', {force: true, cache: false})
+                .then((role) => {
+                    message.channel.send({embeds: [embedRole(role, message.guild)]})
+                })
+                .catch(err => message.channel.send('Không tìm thấy role nào như vậy!'))
         }
     }
 }      

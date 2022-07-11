@@ -1,9 +1,9 @@
 const config = require('../../config.json')
 module.exports = {
     name: 'user',
-    aliases: ['mem', 'member'],
+    aliases: ['info', 'mem', 'member'],
     inVoiceChannel: false,
-    run:async (client, message) => {
+    run:async (client, message, args) => {
         const users = Array.from(message.mentions.users.values())
         let member
         if(users.length) member = await message.guild.members.fetch(users[0].id)
