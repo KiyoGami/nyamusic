@@ -86,7 +86,7 @@ const infoCommands  = [
     },
     {
         name: 'Server info',
-        value: '(test)',
+        value: '\`server/sv\`',
         inline: true,
     },
     {
@@ -96,7 +96,7 @@ const infoCommands  = [
     },
     {
         name: 'Member info',
-        value: '(test)',
+        value: '\`mem/user\`',
         inline: true,
     },
     {
