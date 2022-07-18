@@ -100,13 +100,13 @@ const infoCommands  = [
         inline: true,
     },
     {
-        name:'\u200b',
-        value: '\u200b',
-        inline: true
-    },
-    {
         name: 'Avatar',
         value: '\`avatar/avt\`',
+        inline: true,
+    },
+    {
+        name: 'Thông tin RAM',
+        value: '\`os\`',
         inline: true,
     },
 ]
